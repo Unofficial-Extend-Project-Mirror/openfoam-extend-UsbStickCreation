@@ -1,0 +1,246 @@
+#!/bin/bash
+
+###################################################################################
+# Copyright (C) 2010 by Oliver Borm, oli.borm@web.de                              #
+#                                                                                 #
+# This program is free software: you can redistribute it and/or modify            #
+# it under the terms of the GNU General Public License as published by            #
+# the Free Software Foundation, either version 3 of the License, or               #
+# (at your option) any later version.                                             #
+#                                                                                 #
+# This program is distributed in the hope that it will be useful,                 #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of                  #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   #
+# GNU General Public License for more details.                                    #
+#                                                                                 #
+# You should have received a copy of the GNU General Public License               #
+# along with this program. If not, see <http://www.gnu.org/licenses/>.            #
+###################################################################################
+
+## change between and dvd|usb
+BUILD="usb"
+DESKTOP="kubuntu-desktop"
+
+### packages:
+USBPACKAGES=\
+( \
+  blender \
+  gnuplot \
+  grace \
+  gsl-bin \
+  imagemagick \
+  kmplayer \
+  mplayer \
+# mplayer won't play all my movies!
+  kaffeine \
+  openssh-server \
+  vim \
+)
+
+DVDPACKAGES=\
+( \
+#  code-saturne \ ## in debian sid
+#  salome \ ## in debian sid
+  dx \
+  elmer \
+  gerris \
+  gfortran \
+  gimp \
+  inkscape \
+#  kile \
+  qcad \
+  qtiplot \
+  rkward \
+#   sagemath \  ## no longer in ubuntu
+  scilab \
+  wxmaxima \
+  xfoil \
+#  openfoam-dev-1.5-doc \
+)
+
+CAEADDPACKAGES=\
+( \
+  freecad \
+  gmsh \
+  octave3.2 \
+  yacas \
+)
+
+CAEPPAPACKAGES=\
+( \
+  bladedesigner \
+  calculix-ccx \
+  calculix-cgx \
+  candystore \
+  engrid \
+  mittel \
+  netgen \
+  skv \
+  cgnsfoam-of15dev \
+  funkysetfields-of15dev \
+  libgroovybc-of15dev \
+  libsimplefunctionobjects-of15dev \
+)
+
+OPENFOAMDEPS=\
+( \
+  binutils-dev \
+  libcgns-dev \
+  libopenmpi-dev \
+  libparmetis-dev \
+  libreadline-dev \
+  libscotch-dev \
+  zlib1g-dev \
+  g++ \
+  flex \
+  bison \
+  doxygen \
+  graphviz \
+  cmake \
+  libmgridgen-dev \
+)
+
+OPENFOAMPACKAGE=\
+( \
+  openfoam-dev-1.5-dev \
+  paraview \
+  pyfoam \
+  openmpi-bin \
+)
+
+ADDPACKAGES=\
+( \
+  abrowser-branding \
+  gparted \
+  subversion \
+  gitk \
+  git-cola \
+  kdiff3 \
+#  linux-image-generic linux-headers-generic linux-source \
+  virtualbox-ose \
+  virtualbox-ose-qt \
+  virtualbox-ose-guest-x11 \
+  virtualbox-ose-guest-dkms \
+  emacs \
+  usb-creator-kde \
+# Henrik's selection for a fater system
+#  meld \
+#  gedit \
+#  nedit \
+#  xemacs \
+# Henrik's selection for an even fater system
+#  texlive-base \
+#  kile \
+)
+## defaults: diffutils, rsync
+
+## abrowser because of: http://de.wikipedia.org/wiki/Namensstreit_zwischen_Debian_und_Mozilla
+
+KDEADDONS=\
+( \
+# needed for fully functioning okular - including some types of PS
+  libepub0 \
+  gwenview \
+  kcalc \
+  kate \
+  kubuntu-default-settings \
+  fglrx-modaliases \
+  nvidia-common \
+  plasma-widget-folderview \
+  plasma-widget-quickaccess \
+  plasma-widgets-addons \
+  network-manager-kde \
+)
+
+###
+
+if [ "$BUILD" != "dvd" ]; then
+	APTOPTS="--no-install-recommends"
+fi
+
+function failure()
+{
+	echo "$@"
+	exit 1
+}
+
+function prepare_install()
+{
+	apt-get update
+}
+
+
+function upgrade_packages()
+{
+	apt-get dist-upgrade --assume-yes --force-yes
+}
+
+function install_packages()
+{
+	apt-get install --assume-yes --force-yes ${APTOPTS} "$@"
+}
+
+function remove_packages()
+{
+	apt-get --purge remove --assume-yes --force-yes "$@"
+}
+
+## copy new sources list
+cp -L /tmp/sources.list /etc/apt/sources.list || failure "cannot copy sources.list"
+
+## activate cae repository
+# local
+# echo "deb file:///tmp/depot binary/" >> /etc/apt/sources.list
+
+# launchpad cae-team ppa
+add-apt-repository ppa:cae-team/ppa
+
+##
+prepare_install
+
+echo ">>> Upgrading packages"
+
+if [ "$BUILD" = "dvd" ]; then
+	echo ">> Creating DVD"
+	install_packages ${DVDPACKAGES[@]}
+else
+	echo ">> Creating USB"
+	## install kubuntu-desktop without recommended packages to size down the desktop
+
+#	install_packages debfoster
+#	debfoster -q
+#	sed -i "/${DESKTOP}/d" /var/lib/debfoster/keepers || failure "cannot remove ${DESKTOP} from keepers file"
+#	remove_packages ${DESKTOP}
+#	echo "y" > /tmp/debfosterinput.txt
+# 	debfoster -f < /tmp/debfosterinput.txt ## 967MB Plattenplatz freigegeben
+# 	install_packages ${DESKTOP}
+# 	install_packages ${KDEADDONS[@]}
+
+	install_packages ${DVDPACKAGES[@]}
+fi
+
+echo ">>> Installing packages"
+install_packages ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]}
+
+echo ">>> Removing packages"
+remove_packages kubuntu-firefox-installer
+
+echo ">>> Upgrade packages"
+# Disable kernel upgrades
+echo linux-image-2.6.32-22-generic hold | dpkg --set-selections
+echo linux-headers-2.6.32-22-generic hold | dpkg --set-selections
+upgrade_packages
+# But let the user hang himself
+echo linux-image-2.6.32-22-generic install | dpkg --set-selections
+echo linux-headers-2.6.32-22-generic install | dpkg --set-selections
+
+# or delete them afterwards - This kills the mouse pointer
+#echo ">>> Removing old kernels"
+#dpkg -l|grep linux-image-2|cut -d' ' -f3|sort -rV|sed -e '1 D'|xargs dpkg -P
+#dpkg -l|grep linux-headers-2|cut -d' ' -f3|grep -v generic|sort -rV|sed -e '1 D'|xargs apt-get purge
+#dpkg-reconfigure grub-pc
+
+
+## update locate database
+echo ">>> update locate database"
+/etc/cron.daily/mlocate || failure "cannot update locate database"

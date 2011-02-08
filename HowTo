@@ -1,0 +1,38 @@
+
+* Wie erstelle ich ein Paket?
+
+Aus einem debian-source Paket, welches aus den drei Dateien .dsc, .orig.tar.gz und .diff.gz besteht, werden (mehrere) Binärpakete erstellt. Mit Hilfe von einigen Hilfsprogrammen wird ein debian Unterordner im Quellverzeichnis mit den benötigten Dateien erstellt. Zu diesen gehören, u.a.:
+
+debian/copyright -> dort stehen die Lizenzen des Quellverzeichnisses drin
+debian/README.Debian -> eine optionale debian README Datei in später mit installiert wird
+debian/changelog -> Dort stehen zum einen die am Paket gemachten Änderungen drin, sowie Paketname, Versionsnummer und Name des Release für welches das Paket gebaut werden soll. Später wichtig zum Hochladen auf launchpad.net
+debian/control -> Dort sind die Source- als auch die Binärpakete aufgelistet, sowie die expliziten, wie auch impliziten (d.h. er findet selbstständig heraus, gegen welche Bibliotheken gelinkt worden ist.) Abhängigkeiten.
+debian/rules -> das Makefile mit das Source-Paket kompiliert werden soll
+debian/patches -> Unterordner in dem sich alle benötigten patches befinden
+
+Im Prinzip geht es dann darum, oben genannte Dateien geeignet anzupassen. Ich kann als Einstiegslektüre folgendes empfehlen (Ich kann's auch nicht besser erklären als in diesen Dateien):
+
+http://www.debian.org/doc/manuals/maint-guide/maint-guide.de.pdf
+https://wiki.ubuntu.com/PackagingGuide/Complete
+http://www.debian.org/doc/manuals/apt-howto/ch-sourcehandling.en.html
+https://help.launchpad.net/Packaging/PPA/Uploading
+
+Vielleicht ist es das Beste einfach mal mit einem bereits existierenden Paket zu starten. Um das letzte debian-source Paket von openfoam-dev-1.5 zu bekommen, einfach folgendes tun:
+
+sudo echo "deb-src http://ppa.launchpad.net/cae-team/ppa/ubuntu intrepid main" >> /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get build-dep openfoam-dev-1.5				## install all build dep's for source package openfoam-dev-1.5
+apt-get source openfoam-dev-1.5					## download source package
+dpkg-buildpackage -rfakeroot -uc -b				## compile source package
+sudo dpkg -i openfoam-dev-1.5_2009.04.11-1~ppa1~intrepid1_amd64.deb	## install package
+	
+* Wie wurde das vorliegende Iso gemacht?
+
+Skripte liegen unter kubuntuLive -- Ausführen des mkLiveImage.sh Skriptes sollte reichen
+
+./mkLiveImage.sh kubuntu-10.04-desktop-i386.iso kde-input-files/ <dvd|usb>
+
+	
+* Install-Skripte für Windows und Linux.
+
+

@@ -1,0 +1,3 @@
+[Added Associations]
+application/x-desktop=kde4-kate.desktop;openoffice.org-writer.desktop;emacs23.desktop;
+text/html=abrowser.desktop;kde4-kfmclient_html.desktop;kde4-kate.desktop;openoffice.org-writer.desktop;emacs23.desktop;

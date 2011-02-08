@@ -1,0 +1,551 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Linux commands</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Linux)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="H&aring;kan Nilsson">
+	<META NAME="CHANGED" CONTENT="20090928;9284900">
+	<META NAME="CHANGEDBY" CONTENT="Håkan Nilsson">
+</HEAD>
+<BODY LANG="sv-SE" DIR="LTR">
+<H1>A short Linux tutorial by Håkan Nilsson</H1>
+<H1>Working in linux</H1>
+<P>In Linux you have the option to work graphically or text based. In
+this course we will work text based, since that way we have better
+control of what we are doing (and I am used to working that way).</P>
+<P>To start with, you need to open a terminal window. You do that
+either by right-clicking on the desktop and clicking on 'Terminal' or
+'Console', or you should be able to find a button looking like a
+computer monitor to click on somewhere. Once you have a terminal
+window open you need to know some useful Linux commands.</P>
+<H1>Manage files and directories</H1>
+<P>Here are some useful Linux commands. If you do all the commands in
+the same order as they are presented below you will go through a
+small tutorial on how to use these commands:</P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 RULES=ROWS STYLE="page-break-inside: avoid">
+	<COL WIDTH=128*>
+	<COL WIDTH=128*>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P STYLE="margin-bottom: 0in">cd</P>
+			<P>(or: cd ~)</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Move to your home directory. You should be there already if you
+			just opened the terminal. 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>ls</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>List the files and directories in a directory (use this command
+			at any time during the tutorial to see what files and directories
+			you have in the current directory!) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>ls -l</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>List the files in a directory with extended information 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>ls -a</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>List all files, including hidden files (files with names
+			starting with a dot, for example .bashrc)</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>mkdir linuxTutorial</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Make a directory named linuxTutorial. Note that Linux is
+			case-sensitive, i.e. 'linuxTutorials' is different from
+			'linuxtutorials'.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cd linuxTutorial</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Move into the directory named linuxTutorial</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>echo &quot;Hello World!&quot;</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Print &quot;Hello World&quot; in the terminal window</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>echo &quot;A first text line in my file&quot; &gt; myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Create a file named myFile.txt, and add a line to it saying: &quot;A
+			first text line in my file&quot;. The '&gt;' re-directs the output
+			from the echo command to a file instead of to the terminal window.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>echo &quot;A second text line in my file&quot; &gt;&gt;
+			myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Append the line &quot;A second text line in my file&quot; to
+			myFile.txt. The '&gt;&gt;' appends the output of the echo command
+			to the same file as before. If we had used the '&gt;' we would
+			have overwritten the file instead. 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cp myFile.txt copyOfMyFime.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Copy the file (check with ls!) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>rm myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>remove the original file (check with ls!) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>mv copyOfMyFime.txt myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Rename the new file to the name of the original file (check
+			with ls!) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>mkdir aSecondDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Make a directory named aSecondDirectory inside the
+			linuxTutorial directory (check with ls!) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cd aSecondDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Move inside aSecondDirectory</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cd ..</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Move up one directory, in this case to the directory named
+			linuxTutorial 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>rmdir aSecondDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Remove the empty directory named aSecondDirectory</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>mkdir -p aSecondDirectory/aThirdDirectory/aFourthDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Create this directory structure inside the linuxTutorial
+			directory</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cp myFile.txt aSecondDirectory/aThirdDirectory/aFourthDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Copy the file to the directory named aFourthDirectory</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>ls aSecondDirectory/aThirdDirectory/aFourthDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>List the files in the directory named aFourthDirectory 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cd aSecondDirectory/aThirdDirectory/aFourthDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Go to the directory named aFourthDirectory 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>pwd</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Show your current directory path 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cd ../../..</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Move up three directory levels (you should now be in the
+			linuxTutorial directory (check with pwd) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>tree -L 3</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Print out directory structure in the terminal window 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>tree -L 2</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Print out only two levels of the directory structure 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>tree -d</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Print out only the directories in the directory structure 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>more myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>View the contents of myFile.txt. If the file is large you exit
+			with 'q', and move down in the file by pressing 'Enter' 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>head myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>View the beginning myFile.txt (in this case it shows all of the
+			file since it is small). 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>tail myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>View the end of myFile.txt (in this case it shows all of the
+			file since it is small). 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>tail -f myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>View the end of a file and update when lines are added to the
+			file. Exit with 'CTRL-c' 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>tailf myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Same as 'tail -f', but can be faster. Exit with 'CTRL-c' 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>grep &quot;second text line&quot; myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Search for the string &quot;second text line&quot; in
+			myFile.txt, and print out all lines that match 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>grep -r &quot;first text line&quot; aSecondDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Search for the string &quot;first text line&quot; recursively
+			in the directory named aSecondDirectory 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>find aSecondDirectory -iname &quot;*yfi*&quot;</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Find all files that have the string 'yfi' in their file name.
+			The string is not case sensitive because we use the flag -iname.
+			The '*' means 'any string'. The command is recursive. 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>sed -i s/&quot;second text line&quot;/&quot;modified text
+			line&quot;/g myFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Substitute the string &quot;second text line&quot; in
+			myFile.txt with &quot;modified text&quot;. Use your Linux skills
+			to check that it was done! The sed-commands can also be used in
+			the 'vi' editor which will be discussed later.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P STYLE="margin-bottom: 0in">mkdir newDirectory</P>
+			<P>cp --parents
+			aSecondDirectory/aThirdDirectory/aFourthDirectory/myFile.txt
+			newDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Make a new directory and copy the whole file structure of
+			myFile.txt into that directory. Use your Linux knowledge to check
+			out the directory structure, and then remove newDirectory.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>rm -r aSecondDirectory</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>remove directory aSecondDirectory and all files and directories
+			in it (rmdir does not work if there are files or directories in a
+			directory) 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>ln -s myFile.txt softLinkToMyFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Make a soft link to myFile.txt. The original file will NOT be
+			copied, but the name softLinkToMyFile.txt will point at
+			myFile.txt. If you edit softLinkToMyFile.txt tou will actually
+			edit myFile.txt. However, removing softLinkToMyFile.txt will only
+			remove the link, and not myFile.txt. You can see links using the
+			'ls -l' command, showing the sign '-&gt;', meaning that it points
+			at another file.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>touch touchedFile.txt</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Create a file without opening it, and without adding anything
+			in it.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>cd ; rm -r linuxTutorial</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Removes the linuxTutorial directory. Note that we here do two
+			commands at the same line, first a cd, and then an rm! 
+			</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>exit</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>close connection (terminal window)</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+<H1>Managing processes</H1>
+<P>Here are some useful Linux commands. If you do all the commands in
+the same order as they are presented below you will go through a
+small tutorial on how to use these commands:</P>
+<TABLE WIDTH=100% BORDER=1 CELLPADDING=4 CELLSPACING=3 RULES=ROWS STYLE="page-break-inside: avoid">
+	<COL WIDTH=128*>
+	<COL WIDTH=128*>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>xlogo &amp; 
+			</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Put a job in background when starting it. 'xlogo' is the job we
+			run in this case, and '&amp;' puts it in background, so that you
+			can continue working in the terminal window. Of course, any other
+			process than xlogo can be used.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>jobs</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>List background jobs in the current terminal window.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>ps -ef | grep xlogo</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>List all the processes on the computer containing the string
+			'xlogo'. The 'ps -ef' command lists all the processes on the
+			computer. The '|' sign sends that output to the 'grep xlogo'
+			command, which makes sure that only lines containing the string
+			'xlogo' are shown. The first number on each line is the process id
+			(PID).</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>fg</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Put a process in foreground, in this case the xlogo process</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>CTRL-c 
+			</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Kill a process in foreground, in this case the xlogo process</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P STYLE="margin-bottom: 0in">xlogo</P>
+			<P>CTRL-z<BR>bg</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Start a job in foreground (i.e., don't use the '&amp;' sign),
+			which will lock the terminal window from further work. The process
+			can be stopped using CTRL-z, but the process will be paused until
+			it is put in background with the 'bg' command.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>top</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Show the activity of all the processes on the computer. The
+			first number on each line is the process id (PID). Exit by typing
+			'q'.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>kill &lt;PID&gt;</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Kill a job in background. Find the process id (PID) from the ps
+			command, or the top command.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>Kill -9 &lt;PID&gt;</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>If the 'kill' command doesn't work, try to add the -9 flag,
+			which should force the kill.</P>
+		</TD>
+	</TR>
+	<TR VALIGN=TOP>
+		<TD WIDTH=50%>
+			<P>which xlogo</P>
+		</TD>
+		<TD WIDTH=50%>
+			<P>Prints the full path to the xlogo executable, so that you can
+			check that you are running the file you think that you are
+			running.</P>
+		</TD>
+	</TR>
+</TABLE>
+<H1>Other commands</H1>
+<P>Find other useful Linux commands by doing the following:<BR>info
+coreutils<BR>info coreutils ls<BR>info coreutils nohup<BR>(exit by
+typing 'q')<BR>Once you know the name of a command, learn how to use
+it by:<BR>man command<BR>(exit by typing 'q')</P>
+<H1>Editing files</H1>
+<P>For editing files interactively you use a text editor. I commonly
+use 'vi', which is a VERY simple text editor. The benefits of vi is
+that it is quick to open files, and it does not open any new window.
+You do the editing directly in the terminal window. Several of the vi
+commands can also be used in the man pages and in sed commands. On
+the downside, there is no graphical user interface. Search the
+internet for short introductions to vi, for example:
+<A HREF="http://www.cs.colostate.edu/helpdocs/vi.html">http://www.cs.colostate.edu/helpdocs/vi.html</A></P>
+<P>Other alternaties are:<BR>emacs<BR>gedit<BR>nedit</P>
+<H1>Linux Filesystem Hierarchy Standard</H1>
+<P>If you are interested in why the file system looks as it does,
+see:<BR><A HREF="http://www.pathname.com/">http://www.pathname.com </A>
+</BODY>
+</HTML>

@@ -1,0 +1,7 @@
+[Connection_{952a7406-ee48-4aac-8914-07e98fed0be2}]
+LastUsed=2010,5,7,10,18,47
+Name=OpenFOAM Workshop 2010 at Chalmers
+Type=802-11-wireless
+
+[General]
+Connections={952a7406-ee48-4aac-8914-07e98fed0be2}

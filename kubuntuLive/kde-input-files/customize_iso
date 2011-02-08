@@ -1,0 +1,60 @@
+#!/bin/bash
+
+###################################################################################
+# Copyright (C) 2010 by Oliver Borm, oli.borm@web.de                              #
+#                                                                                 #
+# This program is free software: you can redistribute it and/or modify            #
+# it under the terms of the GNU General Public License as published by            #
+# the Free Software Foundation, either version 3 of the License, or               #
+# (at your option) any later version.                                             #
+#                                                                                 #
+# This program is distributed in the hope that it will be useful,                 #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of                  #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   #
+# GNU General Public License for more details.                                    #
+#                                                                                 #
+# You should have received a copy of the GNU General Public License               #
+# along with this program. If not, see <http://www.gnu.org/licenses/>.            #
+###################################################################################
+
+REMASTER_HOME=$1
+
+SOURCEDIR="/home/henrus/PackagingTools/kubuntuLive/kde-input-files"
+REMASTER_DIR="$REMASTER_HOME/remaster-root"
+REMASTER_ISO="$REMASTER_HOME/remaster-iso"
+
+echo "Using REMASTER_DIR=$REMASTER_DIR"
+
+function failure()
+{
+	echo "$@"
+	exit 1
+}
+
+## Remove backups
+find ${SOURCEDIR} \( -name '*~' -o -name '.*~' \) -print | xargs -t rm
+
+## Remove update log
+rm ${SOURCEDIR}/OFW5/updateOFW5.sh.rsync.log
+
+## Remove spurious user
+rm -rf ${REMASTER_DIR}/home/henrus
+
+## copy some pimped config files
+cp -L ${SOURCEDIR}/inputrc ${REMASTER_DIR}/etc/inputrc || failure "cannot copy inputrc"
+cp -Lr ${SOURCEDIR}/skel/* ${SOURCEDIR}/skel/.??* ${REMASTER_DIR}/etc/skel || failure "cannot copy skel"
+
+## copy wall paper:
+cp  -r ${SOURCEDIR}/wallpaper ${REMASTER_DIR}/usr/share/wallpapers/OFW5  || failure "cannot copy wallpaper"
+
+## copy OFW5 to ISO-image
+cp -r ${SOURCEDIR}/OFW5 ${REMASTER_ISO} || failure "cannot copy OFW5 directory"
+
+## Make it writeable for all for updateOFW5.sh
+#chmod -R a+w ${REMASTER_ISO}/OFW5
+
+## copy boot to ISO-image
+cp -r ${SOURCEDIR}/boot ${REMASTER_ISO} || failure "cannot copy boot"
+
+## maybe no longer necessary
+# umount /tmp

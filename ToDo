@@ -1,0 +1,121 @@
+* Ubuntu-User anpassen
+	- Wahrscheinlich noch ein paar Links ;-)
+
+* Liste von fehlenden Paketen erstellen (done in place)
+
+	- OF (1.6-ext, 1-5-dev, Opt, Debug) - jeweils Opt/Debug? HR: z.Zt. ok.
+
+* OpenFOAM
+	- Einheitliche Schreibweise in den OF-Pfaden
+	- Links nach /usr/share/openfoam-1.5-dev
+OB: Wenn dann nur im debian Paket.
+HR: Gerne ;-)
+
+* casper-rw-Skripte
+	- Skripte zur Erstellung/Anpassung der casper-rw. HR: Habe alles Notwendige.
+
+* bootinst-Skripte
+	- Erzeugung/Anpassung der caspar-rw hinzufuegen
+
+* Virtual Box:
+	- Passt es drauf? 
+HR: Was ich meinte waren die Host-Pakete, aber das ich nat�rlich auch gut.
+
+	- How to schreiben
+BG: Wenn es in VirtualBox lauft, dann erkennt die VirtualBox "Ha der versteht mich" (no howTo necessary)
+Weiss nur nicht was passiert, wenn es nicht in einer VB lauft
+HR: Ditto: Wie installiere ich VB z.B. unter Windows und boote dann den Stick?
+OB: Wg. Lizenzproblemen unter Windows (Weitergabe von VB). Gibt es auch die GPL Version kompiliert für Windows? Dann dürfte die Weitergabe kein Lizenzproblem darstellen, nur ein Platzproblem.
+
+------------------------------------------------------
+---------------------- ERLEDIGT ----------------------
+------------------------------------------------------
+
+* HowTo: Wie erstelle ich ein Paket? --> siehe HowTo
+* HowTo: Wie wurde das vorliegende Iso gemacht? --> siehe HowTo
+* fehlende Pakete erstellen:
+	- engit mit ins Boot holen. --> HR: Mal sehen, ob's klappt
+	# togl Paket in sid (http://packages.debian.org/sid/libtogl-dev)
+	# netgen-4.9.12 debian in svn: (http://svn.debian.org/wsvn/pkg-scicomp/netgen/trunk/debian/#_netgen_trunk_debian_)
+	- paraview-3.6.2 --> fertig
+	- PyFoam
+	- HR Wunschliste:
+	- SCM: git (fuer Tutorial checkpointing), gitk, git-cola, subversion (OB: ja ok.)
+	- Reader: fuer pdf tut's okular, fuer ps brauchen wir gv (OB: okular ist ein alleskönner. HR: Stimmt!)
+	- HR Wunschliste (ich lasse das hier mal stehen --> Steht jetzt disabled in customize):
+	Editoren: gedit, xemacs(?), nedit (OB: m.E. nicht notwendig. HR: Jetzt wo emacs drauf ist geht's )
+	Diff: meld (OB: Tut's auch kdiff3/kompare. HR: Zur Not)
+
+* Virtual Box:
+	- Für welche HostSysteme geeignet (BG: Jeder der VB unterst�tzt)
+	BG: Install-size laut dpkg-query (so weit ich weiss holt das -x11 Packet die anderen)
+854:2676 virtualbox-ose-guest-dkms
+855:660 virtualbox-ose-guest-utils
+856:3804 virtualbox-ose-guest-x11
+OB:	Ist drauf.
+
+* locate mit OF-Files in der DB
+
+OB: Welches Paket wird benötigt? Und wie wird die DB erstellt?
+HR: Keine Ahnung. Mein Job.
+OB: /etc/cron.daily/mlocate sollte den Job machen.
+HR: Tested. Works.
+
+
+* Ubuntu-User anpassen
+	- OF bashrc sourcen
+	- Icon fuer Terminal
+	- Icon fuer Tastatur
+	- Desktop-Link zu OFWS-Material
+	- Desktop-Link zu OF-Doku
+	- Desktop-Link zu Training-Material
+	- Desktop-Link zu Editor (nedit, gedit)
+	- Desktop-Link zu Linux Cheat-Sheet
+	- auto-completion fuer environment variablen. Wie geht das in bash? (OB: Weiß ich nicht. Geht das überhaupt?)
+	- Wall-Paper aktualisieren
+	- Chalmers WLAN vor-konfigurieren
+	- OFWS5-Material-Update. rsync-Skript um wget-Option erweitern. Skript in OFWS5/bin. Link auf's Desktop.
+	- Wall-Paper aktualisieren (Gridcore)
+
+
+* OFWS Material
+	- Stubs fuer Papers
+	- Stubs Tutorials-Cases
+
+@Stubs
+OB: alles in den Ordner kubuntuLive/kde-input-files/pdfs
+HR: Ja, ich meinte nur das wir ein/zwei directories anlegen und (alte) Dateien reinpacken. Nicht wichtig.
+
+* Requests from Forum
+	-for complete linux beginnners some sort of "linux for dummies" or linux "cheat-sheet" might be helpful.
+http://www.digilife.be/quickreferences/QRC/The%20One%20Page%20Linux%20Manual.pdf
+
+* Install-Skripte für Windows und Linux.
+
+https://help.ubuntu.com/community/LiveCDCustomizationFromScratch#FAT16%20file-system%20%28Windows%29
+
+--> bootinst.sh & bootinst.bat
+
+* bootinst-Skripte
+	- Ubuntuisieren
+
+* OFWS5 -> OFW4
+	- rename OFWS5 Verzeichnis and links
+	- OFWS5@openfoamwiki.net::OFWS5Docs --> OFW5@openfoamwiki.net::OFW5Docs
+
+
+* OpenFOAM
+	- $FOAM_TUTORIALS zeigt ins Leere
+OB: Quick fix in ~/.bashrc möglich
+HR: Hab's eingebaut. Sollte dann in's OF Paket.
+
+	- OF aliase im bashrc sourcen
+
+* Workshop-Handout schreiben
+	- What's on it?
+	- How to boot?
+	- Altering the keyboard selection?
+	- How to use WLAN at Chalmers?
+	- How to update OFW5 material from USB-booted-OS, Linux-OS, Windows-OS?
+	- Accessing the OFW5 material from Linux-OS (/cdrom), Windows-OS?
+

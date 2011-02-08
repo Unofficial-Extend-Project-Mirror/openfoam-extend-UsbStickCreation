@@ -1,0 +1,11 @@
+[Layout]
+DisplayNames=us,se,de,fr,ru,jp
+IndicatorOnly=false
+LayoutList=us,se,de,fr,ru,jp
+Model=pc104
+Options=
+ResetOldOptions=false
+ShowFlag=true
+ShowSingle=false
+SwitchMode=Global
+Use=true

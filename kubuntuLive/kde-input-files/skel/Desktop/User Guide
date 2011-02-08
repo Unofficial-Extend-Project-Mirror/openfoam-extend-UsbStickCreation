@@ -1,0 +1,4 @@
+[Desktop Entry]
+Icon=/home/ubuntu/.icons/Delta.png
+Type=Link
+URL[$e]=file:///usr/share/doc/openfoam-dev-1.5/UserGuide.pdf.gz

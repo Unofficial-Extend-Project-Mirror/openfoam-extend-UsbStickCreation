@@ -1,0 +1,183 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[pdftex]{hyperref}
+%\usepackage{english}
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{ae}
+\usepackage[cm]{fullpage}
+\usepackage[small,compact]{titlesec}
+\usepackage{times}
+\usepackage{tweaklist}
+\usepackage{html}
+
+\begin{document}
+
+\renewcommand{\enumhook}{\setlength{\topsep}{0pt}%
+  \setlength{\itemsep}{0pt}}
+
+\setlength{\columnseprule}{1pt}
+
+\makeatletter
+\renewcommand{\@maketitle}{
+\newpage
+ \null
+ \vskip 2em%
+ \begin{center}%
+  {\LARGE \@title \par}%
+ \end{center}%
+ \par} \makeatother
+\title{Instructions for the 5th OpenFOAM Workshop USB-stick}
+\maketitle
+
+\section{What's on the USB-Stick?}
+
+The USB-stick contains the workshop material (program, abstracts, presentations
+and training material) which can be updated automatically via the Internet. In
+addition it contains a fully operational Linux operating system based on
+Kubuntu, and lots of useful CAE software including OpenFOAM (including pyFoam,
+cgnstools funkySetFields, groovyBC and simpleFunctionObjects), Open CASCADE,
+calculix, paraview with Takuya's OpenFOAM reader, enGrid, netgen, gmsh, blender,
+freecad, qcad, elmer, gerris, xfoil, bladedesigner, mittel, skv, octave, yacas
+and many more.
+
+The workshop material is located in the OFW5 folder which resides in the
+USB-stick's root-directory and can be accessed without booting the stick.  If
+you boot from the USB-stick, you will find a link labeled \emph{5th Workshop} in
+the \emph{Desktop Folder} which takes you there -- ``cd /cdrom/OFW5'' for those
+who dislike GUIs.
+
+\section{How to boot it?}
+
+On ``standard'' laptops and PCs, things should be straight forward. Simply plug
+the USB-stick in and boot your machine. You will be asked for the language you
+prefer before you get to the kubuntu splash screen. Here select ``Try Kubuntu
+without installing''. Booting your machine from the USB-stick will {\bf not}
+change your normal operating system in any way. Later, if you like, you have the
+option of installing Kubuntu and the included software on your computer
+permanently.
+
+If the machine boots from harddisk and {\bf not} into Kubuntu, you will have to
+change the boot order in the BIOS.  You can enter the BIOS by pressing a
+specific key during start-up (usually Del, F1, F2, F10, F12 - watch out for
+instructions on the screen during the boot procedure).  In the BIOS, make sure
+that the USB device is booted in preference to anything else, or choose a
+one-time boot from the USB device.
+
+\section{How to boot in a VirtualBox?}
+
+This is for people who would like to run the USB-stick within their normal
+operating system (Linux, Mac OS X, Windows). Here, we assume that the
+VirtualBox-software is installed on your computer and that you are familiar with
+the command line (the "Terminal Window") or at least know where to find it. You
+will also need to have administrative rights on your machine, ie. you are
+allowed to do ``sudo somecommand''.
+\begin{latexonly}
+The full instructions can be found here:
+\href{http://web.student.chalmers.se/groups/ofw5/Instr.htm}{http://web.student.chalmers.se/groups/ofw5/Instr.htm}.
+\end{latexonly}
+\begin{htmlonly}
+The general procedure is as follows:
+%
+\begin{enumerate}
+\item Plug in the USB-stick
+\item Find out which device the USB-stick is
+\item Create a raw disk file using ``VBoxManage internalcommands
+  createrawvmdk''
+\item Create a new virtual machine in VirtualBox and attach the raw disk file
+  that you just created
+\item Boot the virtual machine. It should boot from the USB-stick
+\end{enumerate}
+%
+{\bf Caution:} The command line parameters are only examples and have to be
+adapted to your system. When doing this on a Mac you won't be able to access the
+filesystem on the USB-stick from the Finder.
+\end{htmlonly}
+
+\begin{htmlonly}
+
+{\bf on Linux:}
+\begin{verbatim}
+df
+VBoxManage internalcommands createrawvmdk -filename ~/.VirtualBox/HardDisks/usb.vmdk -rawdisk /dev/sdb -register
+# Sometimes you need to give special permissions ...
+sudo chmod 666 /dev/sdb*
+sudo chown felix ~/.VirtualBox/HardDisks/usb.vdmk
+\end{verbatim}
+
+{\bf on Mac OS X:}
+\begin{verbatim}
+df
+# Unmount the USB-stick
+sudo diskutil unmount /dev/disk2s1
+VBoxManage internalcommands createrawvmdk -filename /Users/igarten/Desktop/stickBoot.vmdk -rawdisk /dev/disk2 -register
+# The VirtualBox may complain that it cannot gain exclusive access to the disk 
+# if the Finder mounted it again automatically. Redo the last two steps!
+\end{verbatim}
+
+{\bf on Windows:}
+\begin{verbatim}
+diskmgmt.msc
+cd %programfiles%\sun\virtualbox
+VBoxManage internalcommands createrawvmdk -filename "%USERPROFILE%"\.VirtualBox\VDI\usb.vmdk -rawdisk \\.\PhysicalDrive1 -register
+\end{verbatim}
+
+\end{htmlonly}
+
+\section{How to alter the keyboard layout?}
+
+The keyboard layout can be changed by clicking on the little US flag icon
+located at the bottom right of the desktop. More keyboard layouts can be access
+by clicking the right mouse button on it.
+
+\section{How to use the WLAN at Chalmers?}
+
+You should use the {\bf NOMAD} wireless network during the workshop. This network
+is preconfigured and should come up automatically when you boot the USB-stick. The
+control can be found at the bottom right of the desktop.
+
+The network is not secured, but you must login via a web browser in order to use
+it.  With your registration package you should have received instructions for
+\emph{Internet Access at Chalmers}, and your personal username and password.
+
+\section{How to update the workshop material?}
+
+The workshop material (program, abstracts, presentations and training material)
+can be updated via the Internet. If you boot from the USB-stick, you will find a
+link labeled \emph{Update Workshop material} in the \emph{Desktop Folder} which
+does the job. If your machine is booted into Linux or Mac OS X, you can use the
+update script (cd OFW5; sudo ./update.sh) manually. Note that you must start the
+script within the OFW5 directory. Sometimes the script complains that the stick
+is mounted read-only. This can be fixed by issuing
+{\small
+\begin{verbatim}
+sudo mount -o remount,rw /cdrom
+\end{verbatim}}
+
+There is no update functionality for Windows, but the material is available
+online from
+\begin{latexonly}
+\href{http://web.student.chalmers.se/groups/ofw5/Program.htm}{http://web.student.chalmers.se/groups/ofw5/Program.htm}
+\end{latexonly}
+\begin{htmlonly}
+\htmladdnormallink {http://web.student.chalmers.se/groups/ofw5/Program.htm} {http://web.student.chalmers.se/groups/ofw5/Program.htm}
+\end{htmlonly}
+
+\section{How to erase or resize the persistent storage?}
+
+The persistent storage is used to save your result on the USB-stick. Currently,
+512 Mb are allocated in casper-rw for this purpose. In case you want to reset
+the persistent storage, simply do
+{\small
+\begin{verbatim}
+dd if=/dev/zero of=casper-rw bs=1M count=512
+mkfs.ext3 -F casper-rw
+\end{verbatim}}
+
+You may also resize {\bf without} loosing your data
+{\small
+\begin{verbatim}
+resize2fs casper-rw 1024M
+\end{verbatim}}
+
+
+\end{document}
