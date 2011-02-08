@@ -31,16 +31,17 @@
 
 \section{What's on the USB-Stick?}
 
-The USB-stick contains the workshop material (program, abstracts, presentations
-and training material) which can be updated automatically via the Internet. In
-addition it contains a fully operational Linux operating system based on
-Kubuntu, and lots of useful CAE software including OpenFOAM (including pyFoam,
-cgnstools funkySetFields, groovyBC and simpleFunctionObjects), Open CASCADE,
-calculix, paraview with Takuya's OpenFOAM reader, enGrid, netgen, gmsh, blender,
-freecad, qcad, elmer, gerris, xfoil, bladedesigner, mittel, skv, octave, yacas
-and many more.
+The USB-stick holds the workshop material (program, abstracts, presentations and
+training material) which can be updated automatically via the Internet. In
+addition, it contains a fully operational Linux operating system based on
+Kubuntu which is pimped-up with a lot of useful CAE software including OpenFOAM,
+OpenFOAM Add-ons (pyFoam, cgnstools funkySetFields, groovyBC and
+simpleFunctionObjects), Open CASCADE, calculix, paraview with Takuya's OpenFOAM
+reader, enGrid, netgen, gmsh, blender, freecad, qcad, elmer, gerris, xfoil,
+bladedesigner, mittel, skv, octave, yacas and many more. A full list of the
+installed packages can be found in the /cdrom/casper directory.
 
-The workshop material is located in the OFW5 folder which resides in the
+The workshop material is located in the OFW5 directory which resides in the
 USB-stick's root-directory and can be accessed without booting the stick.  If
 you boot from the USB-stick, you will find a link labeled \emph{5th Workshop} in
 the \emph{Desktop Folder} which takes you there -- ``cd /cdrom/OFW5'' for those
@@ -49,12 +50,9 @@ who dislike GUIs.
 \section{How to boot it?}
 
 On ``standard'' laptops and PCs, things should be straight forward. Simply plug
-the USB-stick in and boot your machine. You will be asked for the language you
-prefer before you get to the kubuntu splash screen. Here select ``Try Kubuntu
-without installing''. Booting your machine from the USB-stick will {\bf not}
-change your normal operating system in any way. Later, if you like, you have the
-option of installing Kubuntu and the included software on your computer
-permanently.
+the USB-stick in and boot your machine. You will be asked for your preferred
+language before you get to the Kubuntu splash screen. Here you select ``Try
+Kubuntu without installing''.
 
 If the machine boots from harddisk and {\bf not} into Kubuntu, you will have to
 change the boot order in the BIOS.  You can enter the BIOS by pressing a
@@ -62,6 +60,12 @@ specific key during start-up (usually Del, F1, F2, F10, F12 - watch out for
 instructions on the screen during the boot procedure).  In the BIOS, make sure
 that the USB device is booted in preference to anything else, or choose a
 one-time boot from the USB device.
+
+Booting your machine from the USB-stick will {\bf not} change your normal
+operating system in any way. Later, if you like, you have the option of
+installing Kubuntu and the included software on your computer permanently -- It
+will be a 32-Bit system.  You may also add or upgrade the software packages via
+the internet.
 
 \section{How to boot in a VirtualBox?}
 
@@ -120,7 +124,6 @@ diskmgmt.msc
 cd %programfiles%\sun\virtualbox
 VBoxManage internalcommands createrawvmdk -filename "%USERPROFILE%"\.VirtualBox\VDI\usb.vmdk -rawdisk \\.\PhysicalDrive1 -register
 \end{verbatim}
-
 \end{htmlonly}
 
 \section{How to alter the keyboard layout?}
@@ -148,10 +151,12 @@ does the job. If your machine is booted into Linux or Mac OS X, you can use the
 update script (cd OFW5; sudo ./update.sh) manually. Note that you must start the
 script within the OFW5 directory. Sometimes the script complains that the stick
 is mounted read-only. This can be fixed by issuing
-{\small
+
+{\scriptsize
 \begin{verbatim}
 sudo mount -o remount,rw /cdrom
-\end{verbatim}}
+\end{verbatim}
+}
 
 There is no update functionality for Windows, but the material is available
 online from
@@ -167,17 +172,23 @@ online from
 The persistent storage is used to save your result on the USB-stick. Currently,
 512 Mb are allocated in casper-rw for this purpose. In case you want to reset
 the persistent storage, simply do
-{\small
+
+{\scriptsize
 \begin{verbatim}
 dd if=/dev/zero of=casper-rw bs=1M count=512
 mkfs.ext3 -F casper-rw
-\end{verbatim}}
+\end{verbatim}
+}
 
 You may also resize {\bf without} loosing your data
-{\small
+
+{\scriptsize
 \begin{verbatim}
 resize2fs casper-rw 1024M
-\end{verbatim}}
+\end{verbatim}
+}
 
+% sudo apt-get install virtualbox-ose-guest-utils
+% sudo /etc/init.d/virtualbox-ose-guest-utils start
 
 \end{document}
