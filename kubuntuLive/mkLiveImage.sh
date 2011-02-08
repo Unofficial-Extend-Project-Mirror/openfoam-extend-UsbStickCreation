@@ -70,7 +70,9 @@ sed -i "s@`grep SOURCEDIR= $SCRIPTPATH/customize_iso`@SOURCEDIR=\"$SCRIPTPATH\"@
 cp $SCRIPTPATH/sources.list $TMPDIR
 
 ## copy local repository
-# cp -r ~/Dokumente/builds/depot $TMPDIR
+#mkdir -p $TMPDIR/depot
+#cp -r /home/apt/binary/* $TMPDIR/depot
+#ls -l $TMPDIR
 
 # copy customize script, due to bug: https://bugs.launchpad.net/uck/+bug/547260
 mkdir -p $TMPDIR/customization-scripts
@@ -92,4 +94,5 @@ else
 	ISOPATH="${ISOPATH%${ARCH}.iso}remastered-usb-${ARCH}.iso"
 fi
 
+rm -r $TMPDIR/depot
 cp ~/tmp/remaster-new-files/livecd.iso $ISOPATH

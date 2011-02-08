@@ -56,5 +56,11 @@ cp -r ${SOURCEDIR}/OFW5 ${REMASTER_ISO} || failure "cannot copy OFW5 directory"
 ## copy boot to ISO-image
 cp -r ${SOURCEDIR}/boot ${REMASTER_ISO} || failure "cannot copy boot"
 
+## new kernel
+#mkinitramfs -o ${REMASTER_DIR}/initrd.lz 2.6.32-26-generic
+mv ${REMASTER_DIR}/initrd.lz ${REMASTER_ISO}/casper || failure "cannot copy initrd.lz"
+cp ${REMASTER_DIR}/boot/vmlinuz-*-generic ${REMASTER_ISO}/casper/vmlinuz || failure "cannot copy vmlinuz"
+md5sum ${REMASTER_ISO}/casper/initrd.lz ${REMASTER_ISO}/casper/vmlinuz
+
 ## maybe no longer necessary
-# umount /tmp
+umount /tmp

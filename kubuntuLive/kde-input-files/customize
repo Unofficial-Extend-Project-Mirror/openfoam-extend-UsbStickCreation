@@ -47,7 +47,6 @@ DVDPACKAGES=\
   gfortran \
   gimp \
   inkscape \
-#  kile \
   qcad \
   qtiplot \
   rkward \
@@ -55,7 +54,7 @@ DVDPACKAGES=\
   scilab \
   wxmaxima \
   xfoil \
-#  openfoam-dev-1.5-doc \
+  openfoam-1.6-ext-doc \
 )
 
 CAEADDPACKAGES=\
@@ -68,7 +67,7 @@ CAEADDPACKAGES=\
 
 CAEPPAPACKAGES=\
 ( \
-  bladedesigner \
+#  bladedesigner \
   calculix-ccx \
   calculix-cgx \
   candystore \
@@ -76,10 +75,10 @@ CAEPPAPACKAGES=\
   mittel \
   netgen \
   skv \
-  cgnsfoam-of15dev \
-  funkysetfields-of15dev \
-  libgroovybc-of15dev \
-  libsimplefunctionobjects-of15dev \
+#  cgnsfoam-of15dev \
+#  funkysetfields-of15dev \
+#  libgroovybc-of15dev \
+#  libsimplefunctionobjects-of15dev \
 )
 
 OPENFOAMDEPS=\
@@ -102,7 +101,8 @@ OPENFOAMDEPS=\
 
 OPENFOAMPACKAGE=\
 ( \
-  openfoam-dev-1.5-dev \
+  openfoam-1.6-ext \
+  openfoam-1.6-ext-dev \
   paraview \
   pyfoam \
   openmpi-bin \
@@ -110,13 +110,13 @@ OPENFOAMPACKAGE=\
 
 ADDPACKAGES=\
 ( \
-  abrowser-branding \
+#  abrowser-branding \
   gparted \
   subversion \
   gitk \
   git-cola \
   kdiff3 \
-#  linux-image-generic linux-headers-generic linux-source \
+  linux-headers-generic \
   virtualbox-ose \
   virtualbox-ose-qt \
   virtualbox-ose-guest-x11 \
@@ -170,9 +170,14 @@ function prepare_install()
 }
 
 
-function upgrade_packages()
+function dist_upgrade_packages()
 {
 	apt-get dist-upgrade --assume-yes --force-yes
+}
+
+function upgrade_packages()
+{
+	apt-get upgrade --assume-yes --force-yes
 }
 
 function install_packages()
@@ -190,7 +195,7 @@ cp -L /tmp/sources.list /etc/apt/sources.list || failure "cannot copy sources.li
 
 ## activate cae repository
 # local
-# echo "deb file:///tmp/depot binary/" >> /etc/apt/sources.list
+#echo "deb file:///tmp/depot ./" >> /etc/apt/sources.list
 
 # launchpad cae-team ppa
 add-apt-repository ppa:cae-team/ppa
@@ -198,7 +203,20 @@ add-apt-repository ppa:cae-team/ppa
 ##
 prepare_install
 
-echo ">>> Upgrading packages"
+CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
+echo "The current kernel is $CURRENT_KERNEL" 
+
+# upgrade kernel
+echo ">>> Upgrading kernel"
+install_packages linux-image-generic linux-headers-generic
+
+# delete old kernels
+echo ">>> Removing old kernels"
+dpkg -l|grep linux-image-2|cut -d' ' -f3|sort -rV|sed -e '1 D'|xargs dpkg -P
+dpkg -l|grep linux-headers-2|cut -d' ' -f3|grep -v generic|sort -rV|sed -e '1 D'|xargs apt-get purge
+
+mkinitramfs -o /initrd.lz 2.6.32-26-generic
+
 
 if [ "$BUILD" = "dvd" ]; then
 	echo ">> Creating DVD"
@@ -207,39 +225,32 @@ else
 	echo ">> Creating USB"
 	## install kubuntu-desktop without recommended packages to size down the desktop
 
-#	install_packages debfoster
-#	debfoster -q
-#	sed -i "/${DESKTOP}/d" /var/lib/debfoster/keepers || failure "cannot remove ${DESKTOP} from keepers file"
-#	remove_packages ${DESKTOP}
-#	echo "y" > /tmp/debfosterinput.txt
-# 	debfoster -f < /tmp/debfosterinput.txt ## 967MB Plattenplatz freigegeben
-# 	install_packages ${DESKTOP}
-# 	install_packages ${KDEADDONS[@]}
+	install_packages debfoster
+	debfoster -q
+	sed -i "/${DESKTOP}/d" /var/lib/debfoster/keepers || failure "cannot remove ${DESKTOP} from keepers file"
+	remove_packages ${DESKTOP}
+	echo "y" > /tmp/debfosterinput.txt
+ 	debfoster -f < /tmp/debfosterinput.txt ## 1025MB Plattenplatz freigegeben
 
+	install_packages ${DESKTOP}
+	install_packages ${KDEADDONS[@]}
 	install_packages ${DVDPACKAGES[@]}
 fi
 
 echo ">>> Installing packages"
-install_packages ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]}
+install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]}
 
 echo ">>> Removing packages"
 remove_packages kubuntu-firefox-installer
 
 echo ">>> Upgrade packages"
 # Disable kernel upgrades
-echo linux-image-2.6.32-22-generic hold | dpkg --set-selections
-echo linux-headers-2.6.32-22-generic hold | dpkg --set-selections
-upgrade_packages
+#echo linux-image-$CURRENT_KERNEL-generic hold | dpkg --set-selections
+#echo linux-headers-$CURRENT_KERNEL-generic hold | dpkg --set-selections
+dist_upgrade_packages
 # But let the user hang himself
-echo linux-image-2.6.32-22-generic install | dpkg --set-selections
-echo linux-headers-2.6.32-22-generic install | dpkg --set-selections
-
-# or delete them afterwards - This kills the mouse pointer
-#echo ">>> Removing old kernels"
-#dpkg -l|grep linux-image-2|cut -d' ' -f3|sort -rV|sed -e '1 D'|xargs dpkg -P
-#dpkg -l|grep linux-headers-2|cut -d' ' -f3|grep -v generic|sort -rV|sed -e '1 D'|xargs apt-get purge
-#dpkg-reconfigure grub-pc
-
+#echo linux-image-$CURRENT_KERNEL-generic install | dpkg --set-selections
+#echo linux-headers-$CURRENT_KERNEL-generic install | dpkg --set-selections
 
 ## update locate database
 echo ">>> update locate database"

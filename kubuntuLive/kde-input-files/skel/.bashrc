@@ -107,8 +107,8 @@ export PYTHONPATH=/usr/lib/paraview:${PYTHONPATH}
 
 export CSF_GraphicShr=/usr/lib/libTKOpenGl-6.3.0.so
 
-alias startOF15dev='source /usr/lib/OpenFOAM-1.5-dev/etc/bashrc'
-startOF15dev
+alias startOF16ext='source /usr/lib/OpenFOAM-1.6-ext/etc/bashrc'
+startOF16ext
 
 # source the OpenFOAM aliases (src, tut, sol, ...)
 source $WM_PROJECT_DIR/etc/aliases.sh
