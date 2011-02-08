@@ -5,7 +5,14 @@ fullPath="$location/$theDir"
 
 echo "Syncing from $fullPath"
 
-export RSYNC_PASSWORD=hsidewStoNsIaeki
+export RSYNC_PASSWORD=none
+
+if [ $RSYNC_PASSWORD = "none" ]
+then
+    echo "I think you need add the correct password"
+    exit
+fi
+
 
 if [ ! -d $theDir ]
 then
