@@ -2,7 +2,7 @@
 [Desktop Entry]
 Path=/cdrom/OFW5
 Exec=sudo /cdrom/OFW5/updateOFW5.sh
-Icon=/home/ubuntu/.icons/Delta.png
+Icon=/home/ubuntu/.icons/FOAMlogo.png
 Terminal=true
 TerminalOptions=\s--noclose
 Type=Application
