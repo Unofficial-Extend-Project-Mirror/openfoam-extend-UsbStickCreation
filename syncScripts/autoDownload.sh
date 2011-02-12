@@ -1,0 +1,1 @@
+../kubuntuLive/kde-input-files/OFW6/autoDownload.sh

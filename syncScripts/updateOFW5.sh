@@ -1,1 +1,0 @@
-../kubuntuLive/kde-input-files/OFW5/updateOFW5.sh
