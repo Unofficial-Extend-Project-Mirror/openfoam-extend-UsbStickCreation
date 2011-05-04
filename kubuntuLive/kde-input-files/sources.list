@@ -32,3 +32,6 @@ deb-src http://archive.ubuntu.com/ubuntu lucid multiverse
 # deb-src http://archive.ubuntu.com/ubuntu lucid-updates multiverse
 # deb http://security.ubuntu.com/ubuntu lucid-security multiverse
 # deb-src http://security.ubuntu.com/ubuntu lucid-security multiverse
+
+# the OpenCFD repository
+deb http://www.openfoam.com/download/ubuntu lucid main

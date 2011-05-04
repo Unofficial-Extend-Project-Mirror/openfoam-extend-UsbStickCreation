@@ -152,6 +152,12 @@ KDEADDONS=\
   network-manager-kde \
 )
 
+OPENCFD=\
+(\
+  openfoam171  \
+  paraviewopenfoam380  \
+)
+
 ###
 
 if [ "$BUILD" != "dvd" ]; then
@@ -238,7 +244,7 @@ else
 fi
 
 echo ">>> Installing packages"
-install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]}
+install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]} ${OPENCFD[@]}
 
 echo ">>> Install local packages"
 dpkg -R -i /tmp/localPackages
