@@ -79,6 +79,8 @@ CAEPPAPACKAGES=\
 #  funkysetfields-of15dev \
 #  libgroovybc-of15dev \
 #  libsimplefunctionobjects-of15dev \
+  swak4foam-openfoam-1.6-ext \
+  swak4foam-openfoam-1.6-ext-dev \
 )
 
 OPENFOAMDEPS=\
