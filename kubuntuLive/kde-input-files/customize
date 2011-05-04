@@ -133,6 +133,13 @@ ADDPACKAGES=\
 # Henrik's selection for an even fater system
 #  texlive-base \
 #  kile \
+# Bernhards little wishes
+  ipython \
+  mercurial \
+  mercurial-git \
+#  Not this time.
+#  bzflag \
+  rst2pdf \
 )
 ## defaults: diffutils, rsync
 
@@ -207,6 +214,9 @@ cp -L /tmp/sources.list /etc/apt/sources.list || failure "cannot copy sources.li
 
 # launchpad cae-team ppa
 add-apt-repository ppa:cae-team/ppa
+
+# more recent mercurial (1.8.x). The one in the standard lucid-repositories is 1.3 or so
+add-apt-repository ppa:mercurial-ppa/releases
 
 ##
 prepare_install
