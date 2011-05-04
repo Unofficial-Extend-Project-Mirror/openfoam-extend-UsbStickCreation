@@ -68,6 +68,7 @@ sed -i "s@`grep SOURCEDIR= $SCRIPTPATH/customize_iso`@SOURCEDIR=\"$SCRIPTPATH\"@
 
 ## copy files
 cp $SCRIPTPATH/sources.list $TMPDIR
+cp -r $SCRIPTPATH/localPackages $TMPDIR
 
 ## copy local repository
 #mkdir -p $TMPDIR/depot
