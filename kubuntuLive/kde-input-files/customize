@@ -167,6 +167,16 @@ OPENCFD=\
   paraviewopenfoam380  \
 )
 
+# stuff that is needed for building packages
+BOOTSTRAPSUFF=\
+( \
+  uck \
+  cdbs \
+  debhelper \
+  devscripts \
+  dh-make \
+)
+
 ###
 
 if [ "$BUILD" != "dvd" ]; then
@@ -256,7 +266,7 @@ else
 fi
 
 echo ">>> Installing packages"
-install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]} ${OPENCFD[@]}
+install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]} ${OPENCFD[@]} ${BOOTSTRAPSUFF[@]}
 
 echo ">>> Install local packages"
 dpkg -R -i /tmp/localPackages
