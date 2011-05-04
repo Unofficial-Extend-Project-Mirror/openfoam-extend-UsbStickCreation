@@ -141,6 +141,7 @@ ADDPACKAGES=\
 #  bzflag \
   rst2pdf \
   zsh \
+  jed \
 )
 ## defaults: diffutils, rsync
 
