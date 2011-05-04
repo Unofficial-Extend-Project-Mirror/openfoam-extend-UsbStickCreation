@@ -140,6 +140,7 @@ ADDPACKAGES=\
 #  Not this time.
 #  bzflag \
   rst2pdf \
+  zsh \
 )
 ## defaults: diffutils, rsync
 
