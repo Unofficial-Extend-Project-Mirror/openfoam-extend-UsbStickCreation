@@ -142,6 +142,8 @@ ADDPACKAGES=\
   rst2pdf \
   zsh \
   jed \
+# Stuff requested by Astrid & Holger
+  eclipse-cdt \
 )
 ## defaults: diffutils, rsync
 
