@@ -95,5 +95,5 @@ else
 	ISOPATH="${ISOPATH%${ARCH}.iso}remastered-usb-${ARCH}.iso"
 fi
 
-rm -r $TMPDIR/depot
-cp ~/tmp/remaster-new-files/livecd.iso $ISOPATH
+# rm -r $TMPDIR/depot
+mv ~/tmp/remaster-new-files/livecd.iso $ISOPATH
