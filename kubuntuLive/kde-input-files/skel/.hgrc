@@ -26,3 +26,7 @@ attend = help,annotate,cat,diff,export,glog,log,qdiff
 [diff]
 git=1
 nodates=1
+
+[ui]
+username = The default user <user@openfoam-workshop6-stick>
+verbose = True
