@@ -144,7 +144,7 @@ ADDPACKAGES=\
   zsh \
   jed \
 # Stuff requested by Astrid & Holger
-  eclipse-cdt \
+#  eclipse-cdt \
 )
 ## defaults: diffutils, rsync
 
@@ -225,6 +225,10 @@ function remove_packages()
 
 ## copy new sources list
 cp -L /tmp/sources.list /etc/apt/sources.list || failure "cannot copy sources.list"
+
+#echo "Setting highger cache limit for apt"
+#echo >/etc/apt/apt.conf.d/98CacheLimit "APT::Cache-Limit \"125000000\";"
+#cat /etc/apt/apt.conf.d/98CacheLimit
 
 ## activate cae repository
 # local

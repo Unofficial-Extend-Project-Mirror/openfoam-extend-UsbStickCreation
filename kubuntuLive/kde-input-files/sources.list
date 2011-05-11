@@ -35,3 +35,6 @@ deb-src http://archive.ubuntu.com/ubuntu lucid multiverse
 
 # the OpenCFD repository
 deb http://www.openfoam.com/download/ubuntu lucid main
+
+# Eclipse lives here
+# deb http://ftp.debian.org/debian sid main contrib non-free
