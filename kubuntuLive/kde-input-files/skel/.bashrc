@@ -112,7 +112,8 @@ alias startOF16ext='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD
 alias startOF171='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /opt/openfoam171/etc/bashrc'
 
 # source the OpenFOAM aliases (src, tut, sol, ...)
-source $WM_PROJECT_DIR/etc/aliases.sh
+# source $WM_PROJECT_DIR/etc/aliases.sh
+startOF16ext
 
 # create $FOAM_RUN firectory
 mkdir -p $FOAM_RUN
