@@ -19,7 +19,7 @@
 
 REMASTER_HOME=$1
 
-SOURCEDIR="/home/henrus/PackagingTools/kubuntuLive/kde-input-files"
+SOURCEDIR="/home/$USER/UsbStickCreation/kubuntuLive/kde-input-files"
 REMASTER_DIR="$REMASTER_HOME/remaster-root"
 REMASTER_ISO="$REMASTER_HOME/remaster-iso"
 
@@ -35,20 +35,27 @@ function failure()
 find ${SOURCEDIR} \( -name '*~' -o -name '.*~' \) -print | xargs -t rm
 
 ## Remove update log
-rm ${SOURCEDIR}/OFW5/updateOFW5.sh.rsync.log
+rm -f ${SOURCEDIR}/OFW?/*.rsync.log
+
+echo "Removing users"
 
 ## Remove spurious user
-rm -rf ${REMASTER_DIR}/home/henrus
+# rm -rf ${REMASTER_DIR}/home/henrus
+rm -rf ${REMASTER_DIR}/home/$USER
+
+echo "Copying config"
 
 ## copy some pimped config files
-cp -L ${SOURCEDIR}/inputrc ${REMASTER_DIR}/etc/inputrc || failure "cannot copy inputrc"
-cp -Lr ${SOURCEDIR}/skel/* ${SOURCEDIR}/skel/.??* ${REMASTER_DIR}/etc/skel || failure "cannot copy skel"
+cp -Lf ${SOURCEDIR}/inputrc ${REMASTER_DIR}/etc/inputrc || failure "cannot copy inputrc"
+cp -Lrf ${SOURCEDIR}/skel/* ${SOURCEDIR}/skel/.??* ${REMASTER_DIR}/etc/skel || failure "cannot copy skel"
+
+echo "Copying content"
 
 ## copy wall paper:
-cp  -r ${SOURCEDIR}/wallpaper ${REMASTER_DIR}/usr/share/wallpapers/OFW5  || failure "cannot copy wallpaper"
+cp  -rf ${SOURCEDIR}/wallpaper ${REMASTER_DIR}/usr/share/wallpapers/OFW6  || failure "cannot copy wallpaper"
 
 ## copy OFW5 to ISO-image
-cp -r ${SOURCEDIR}/OFW5 ${REMASTER_ISO} || failure "cannot copy OFW5 directory"
+cp -rf ${SOURCEDIR}/OFW6 ${REMASTER_ISO} || failure "cannot copy OFW6 directory"
 
 ## Make it writeable for all for updateOFW5.sh
 #chmod -R a+w ${REMASTER_ISO}/OFW5
@@ -63,4 +70,4 @@ cp ${REMASTER_DIR}/boot/vmlinuz-*-generic ${REMASTER_ISO}/casper/vmlinuz || fail
 md5sum ${REMASTER_ISO}/casper/initrd.lz ${REMASTER_ISO}/casper/vmlinuz
 
 ## maybe no longer necessary
-umount /tmp
+# umount /tmp
