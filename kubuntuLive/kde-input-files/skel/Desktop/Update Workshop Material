@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Path=/cdrom/OFW5
-Exec=sudo /cdrom/OFW5/updateOFW5.sh
+Path=/cdrom/OFW6
+Exec=sudo /cdrom/OFW6/autoDownload.sh
 Icon=/home/ubuntu/.icons/FOAMlogo.png
 Terminal=true
 TerminalOptions=\s--noclose
