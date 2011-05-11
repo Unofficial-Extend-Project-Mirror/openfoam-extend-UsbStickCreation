@@ -18,7 +18,7 @@
 ###################################################################################
 
 ## change between and dvd|usb
-BUILD="usb"
+BUILD="dvd"
 DESKTOP="kubuntu-desktop"
 
 ### packages:
@@ -42,7 +42,7 @@ DVDPACKAGES=\
 #  code-saturne \ ## in debian sid
 #  salome \ ## in debian sid
   dx \
-  elmer \
+#  elmer \
   gerris \
   gfortran \
   gimp \
@@ -118,15 +118,16 @@ ADDPACKAGES=\
   gitk \
   git-cola \
   kdiff3 \
-  linux-headers-generic \
+#  linux-image-generic linux-headers-generic linux-source \
   virtualbox-ose \
   virtualbox-ose-qt \
   virtualbox-ose-guest-x11 \
   virtualbox-ose-guest-dkms \
   emacs \
+  jed \
   usb-creator-kde \
 # Henrik's selection for a fater system
-#  meld \
+  meld \
 #  gedit \
 #  nedit \
 #  xemacs \
@@ -168,7 +169,7 @@ KDEADDONS=\
 OPENCFD=\
 (\
   openfoam171  \
-  paraviewopenfoam380  \
+  paraviewopenfoam381  \
 )
 
 # stuff that is needed for building packages
@@ -206,12 +207,15 @@ function dist_upgrade_packages()
 
 function upgrade_packages()
 {
-	apt-get upgrade --assume-yes --force-yes
+#	apt-get upgrade --assume-yes --force-yes
+	apt-get dist-upgrade --assume-yes --force-yes
 }
 
 function install_packages()
 {
-	apt-get install --assume-yes --force-yes ${APTOPTS} "$@"
+        echo "install_packages: " "$@"
+#	apt-get install  ${APTOPTS} "$@"
+	apt-get install --fix-missing --assume-yes --force-yes ${APTOPTS} "$@"
 }
 
 function remove_packages()
@@ -235,19 +239,19 @@ add-apt-repository ppa:mercurial-ppa/releases
 ##
 prepare_install
 
-CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
-echo "The current kernel is $CURRENT_KERNEL" 
+#CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
+#echo "The current kernel is $CURRENT_KERNEL" 
 
 # upgrade kernel
-echo ">>> Upgrading kernel"
-install_packages linux-image-generic linux-headers-generic
+#echo ">>> Upgrading kernel"
+#install_packages linux-image-generic linux-headers-generic
 
 # delete old kernels
-echo ">>> Removing old kernels"
-dpkg -l|grep linux-image-2|cut -d' ' -f3|sort -rV|sed -e '1 D'|xargs dpkg -P
-dpkg -l|grep linux-headers-2|cut -d' ' -f3|grep -v generic|sort -rV|sed -e '1 D'|xargs apt-get purge
+#echo ">>> Removing old kernels"
+#dpkg -l|grep linux-image-2|cut -d' ' -f3|sort -rV|sed -e '1 D'|xargs dpkg -P
+#dpkg -l|grep linux-headers-2|cut -d' ' -f3|grep -v generic|sort -rV|sed -e '1 D'|xargs apt-get purge
 
-mkinitramfs -o /initrd.lz 2.6.32-26-generic
+#mkinitramfs -o /initrd.lz 2.6.32-26-generic
 
 
 if [ "$BUILD" = "dvd" ]; then
