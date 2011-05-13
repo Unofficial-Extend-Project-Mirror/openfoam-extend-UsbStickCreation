@@ -139,13 +139,21 @@ ADDPACKAGES=\
   mercurial \
   mercurial-git \
 #  Not this time.
-#  bzflag \
+  bzflag \
   rst2pdf \
   zsh \
   jed \
-# Stuff requested by Astrid & Holger
-#  eclipse-cdt \
 )
+
+WISHLIST=\
+( \
+    # Matt Churchfield
+    python2.7 \
+    # Stuff requested by Astrid & Holger
+    #  eclipse-cdt \
+    eclipse \
+)
+
 ## defaults: diffutils, rsync
 
 ## abrowser because of: http://de.wikipedia.org/wiki/Namensstreit_zwischen_Debian_und_Mozilla
@@ -240,6 +248,9 @@ add-apt-repository ppa:cae-team/ppa
 # more recent mercurial (1.8.x). The one in the standard lucid-repositories is 1.3 or so
 add-apt-repository ppa:mercurial-ppa/releases
 
+# add python2,7 by request by Matt Churchfield
+add-apt-repository ppa:fkrull/deadsnakes
+
 ##
 prepare_install
 
@@ -278,7 +289,7 @@ else
 fi
 
 echo ">>> Installing packages"
-install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]} ${OPENCFD[@]} ${BOOTSTRAPSUFF[@]}
+install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CAEPPAPACKAGES[@]} ${ADDPACKAGES[@]} ${CAEADDPACKAGES[@]} ${OPENCFD[@]} ${WISHLIST[@]} ${BOOTSTRAPSUFF[@]}
 
 echo ">>> Install local packages"
 dpkg -R -i /tmp/localPackages
