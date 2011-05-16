@@ -254,8 +254,8 @@ add-apt-repository ppa:fkrull/deadsnakes
 ##
 prepare_install
 
-#CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
-#echo "The current kernel is $CURRENT_KERNEL" 
+CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
+echo "The current kernel is $CURRENT_KERNEL" 
 
 # upgrade kernel
 #echo ">>> Upgrading kernel"
@@ -266,7 +266,7 @@ prepare_install
 #dpkg -l|grep linux-image-2|cut -d' ' -f3|sort -rV|sed -e '1 D'|xargs dpkg -P
 #dpkg -l|grep linux-headers-2|cut -d' ' -f3|grep -v generic|sort -rV|sed -e '1 D'|xargs apt-get purge
 
-#mkinitramfs -o /initrd.lz 2.6.32-26-generic
+# mkinitramfs -o /initrd.lz 2.6.32-31-generic
 
 
 if [ "$BUILD" = "dvd" ]; then
@@ -305,6 +305,13 @@ dist_upgrade_packages
 # But let the user hang himself
 #echo linux-image-$CURRENT_KERNEL-generic install | dpkg --set-selections
 #echo linux-headers-$CURRENT_KERNEL-generic install | dpkg --set-selections
+
+NEWEST_KERNEL=`dpkg -l | grep linux-image-2 | sort | tail -1 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*-generic\).*/\1/'`
+
+echo ">>> Set up booting from newest kernel $NEWEST_KERNEL"
+
+# make the boot image with the best kernel known to man
+mkinitramfs -o /initrd.lz $NEWEST_KERNEL
 
 ## update locate database
 echo ">>> update locate database"
