@@ -298,9 +298,11 @@ echo ">>> Removing packages"
 remove_packages kubuntu-firefox-installer
 
 echo ">>> Upgrade packages"
+
 # Disable kernel upgrades
-#echo linux-image-$CURRENT_KERNEL-generic hold | dpkg --set-selections
-#echo linux-headers-$CURRENT_KERNEL-generic hold | dpkg --set-selections
+echo linux-image-$CURRENT_KERNEL-generic hold | dpkg --set-selections
+echo linux-headers-$CURRENT_KERNEL-generic hold | dpkg --set-selections
+
 dist_upgrade_packages
 # But let the user hang himself
 #echo linux-image-$CURRENT_KERNEL-generic install | dpkg --set-selections
@@ -308,10 +310,11 @@ dist_upgrade_packages
 
 NEWEST_KERNEL=`dpkg -l | grep linux-image-2 | sort | tail -1 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*-generic\).*/\1/'`
 
-echo ">>> Set up booting from newest kernel $NEWEST_KERNEL"
+echo ">>> Latest kernel is $NEWEST_KERNEL (Current: $CURRENT_KERNEL-generic)"
 
 # make the boot image with the best kernel known to man
-mkinitramfs -o /initrd.lz $NEWEST_KERNEL
+# echo ">>> Set up booting from newest kernel $NEWEST_KERNEL"
+# mkinitramfs -o /initrd.lz $NEWEST_KERNEL
 
 ## update locate database
 echo ">>> update locate database"
