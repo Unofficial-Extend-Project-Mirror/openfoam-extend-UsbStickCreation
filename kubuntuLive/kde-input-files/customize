@@ -257,6 +257,10 @@ prepare_install
 CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
 echo "The current kernel is $CURRENT_KERNEL" 
 
+echo ">>> Installing headers for current kernel"
+install_packages  linux-headers-$CURRENT_KERNEL-generic
+install_packages  linux-headers-$CURRENT_KERNEL
+
 # upgrade kernel
 #echo ">>> Upgrading kernel"
 #install_packages linux-image-generic linux-headers-generic
