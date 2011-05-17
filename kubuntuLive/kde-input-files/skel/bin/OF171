@@ -1,0 +1,4 @@
+#! /bin/sh
+
+export PRESELECT_OPENFOAM=171
+zsh -i

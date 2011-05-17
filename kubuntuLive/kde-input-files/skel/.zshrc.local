@@ -221,8 +221,19 @@ fi
 
 alias startOF16ext='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /usr/lib/OpenFOAM-1.6-ext/etc/bashrc'
 alias startOF171='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /opt/openfoam171/etc/bashrc'
+alias startOF16extWS='startOF16ext;export FOAM_TUTORIALS=/usr/share/doc/openfoam-1.6-ext/examples; source $WM_PROJECT_DIR/etc/aliases.sh'
 
-startOF16ext
-# startOF171
+if [[ $PRESELECT_OPENFOAM == "171" ]] then
+    echo "Using OpenFOAM 1.7.1"
+    startOF171
+elif  [[ $PRESELECT_OPENFOAM == "16extWS" ]] then
+    echo "Using OpenFOAM 1.6-ext with tutorials"
+    startOF16extWS
+else
+    echo "Using OpenFOAM 1.6-ext"
+    startOF16ext
+fi
+
+unset PRESELECT_OPENFOAM
 
 ## END OF FILE #################################################################
