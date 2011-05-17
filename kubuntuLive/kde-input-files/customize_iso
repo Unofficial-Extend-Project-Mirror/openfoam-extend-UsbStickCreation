@@ -49,6 +49,15 @@ echo "Copying config"
 cp -Lf ${SOURCEDIR}/inputrc ${REMASTER_DIR}/etc/inputrc || failure "cannot copy inputrc"
 cp -Lrf ${SOURCEDIR}/skel/* ${SOURCEDIR}/skel/.??* ${REMASTER_DIR}/etc/skel || failure "cannot copy skel"
 
+export SKELDIR=${REMASTER_DIR}/etc/skel/
+export TARDIR=${SOURCEDIR}/softwareTars
+echo "Extracting additional tars to $SKELDIR"
+for tarfile in `ls $TARDIR` 
+do
+    echo "Unpacking $tarfile"
+    tar -xvzf $TARDIR/$tarfile --directory $SKELDIR
+done
+
 echo "Copying content"
 
 ## copy wall paper:
