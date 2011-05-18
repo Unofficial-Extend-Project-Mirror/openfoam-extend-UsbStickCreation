@@ -1,0 +1,5 @@
+[Desktop Entry]
+Icon=/home/ubuntu/.icons/FOAMlogo.png
+Type=Link
+URL[$e]=file:///usr/share/doc/openfoam-1.6-ext-doc/Doxygen/html/index.html
+
