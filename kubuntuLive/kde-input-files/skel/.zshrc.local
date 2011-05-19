@@ -232,7 +232,7 @@ elif  [[ $PRESELECT_OPENFOAM == "16extWS" ]] then
     startOF16extWS
 elif  [[ $PRESELECT_OPENFOAM == "16extDbg" ]] then
     echo "Using OpenFOAM 1.6-ext - Debugging version"
-    startOF16extWS
+    startOF16extDbg
 else
     echo "Using OpenFOAM 1.6-ext"
     startOF16ext
