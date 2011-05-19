@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=/usr/bin/konsole -e "$HOME/bin/OF16extDbg"
+GenericName[en_US]=
+GenericName=
+Icon=utilities-terminal
+MimeType=
+Name[en_US]=OpenFOAM 1.6-ext Debug
+Name=OpenFOAM 1.6-ext Debug
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+X-Ubuntu-Gettext-Domain=desktop_kdebase

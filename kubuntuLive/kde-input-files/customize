@@ -152,6 +152,8 @@ WISHLIST=\
     # Stuff requested by Astrid & Holger
     #  eclipse-cdt \
     eclipse \
+    openfoam-1.6-ext-dbg \
+    openfoam-1.6-ext-dev-dbg \
 )
 
 ## defaults: diffutils, rsync
@@ -241,6 +243,9 @@ cp -L /tmp/sources.list /etc/apt/sources.list || failure "cannot copy sources.li
 ## activate cae repository
 # local
 #echo "deb file:///tmp/depot ./" >> /etc/apt/sources.list
+
+# launchpad bgschaid test-ppa (for debug variant of of)
+add-apt-repository ppa:bgschaid/ppa-test
 
 # launchpad cae-team ppa
 add-apt-repository ppa:cae-team/ppa

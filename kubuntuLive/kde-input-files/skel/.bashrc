@@ -109,6 +109,7 @@ export CSF_GraphicShr=/usr/lib/libTKOpenGl-6.3.0.so
 
 # unsetting FOAM_INST_DIR and the other vars are necessary for a complete switch of the versions
 alias startOF16ext='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /usr/lib/OpenFOAM-1.6-ext/etc/bashrc'
+alias startOF16extDbg='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /usr/lib/OpenFOAM-1.6-ext-dbg/etc/bashrc'
 alias startOF171='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /opt/openfoam171/etc/bashrc'
 
 alias startOF16extWS='startOF16ext;export FOAM_TUTORIALS=/usr/share/doc/openfoam-1.6-ext/examples; source $WM_PROJECT_DIR/etc/aliases.sh'
