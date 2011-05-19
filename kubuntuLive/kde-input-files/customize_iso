@@ -55,7 +55,7 @@ echo "Extracting additional tars to $SKELDIR"
 for tarfile in `ls $TARDIR` 
 do
     echo "Unpacking $tarfile"
-    tar -xvzf $TARDIR/$tarfile --directory $SKELDIR
+    tar -xzf $TARDIR/$tarfile --directory $SKELDIR
 done
 
 echo "Copying content"
