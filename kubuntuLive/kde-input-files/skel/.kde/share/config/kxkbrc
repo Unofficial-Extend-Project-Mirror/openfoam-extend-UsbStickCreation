@@ -1,7 +1,7 @@
 [Layout]
-DisplayNames=us,se,de,fr,ru,jp
+DisplayNames=us,de,fr,se,ru,jp
 IndicatorOnly=false
-LayoutList=us,se,de,fr,ru,jp
+LayoutList=us,de,fr,se,ru,jp
 Model=pc104
 Options=
 ResetOldOptions=false
