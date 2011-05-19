@@ -152,8 +152,9 @@ WISHLIST=\
     # Stuff requested by Astrid & Holger
     #  eclipse-cdt \
     eclipse \
-    openfoam-1.6-ext-dbg \
-    openfoam-1.6-ext-dev-dbg \
+    #    openfoam-1.6-ext-dbg \
+    #    openfoam-1.6-ext-dev-dbg \
+    # the other archive is not found for reasons unknownn. For the time being don't install these packages
 )
 
 ## defaults: diffutils, rsync
