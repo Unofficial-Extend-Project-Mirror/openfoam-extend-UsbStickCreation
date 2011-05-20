@@ -303,6 +303,8 @@ install_packages ${OPENFOAMDEPS[@]} ${OPENFOAMPACKAGE[@]} ${USBPACKAGES[@]} ${CA
 
 echo ">>> Install local packages"
 dpkg -R -i /tmp/localPackages
+# Free unused space
+rm -r /tmp/localPackages
 
 echo ">>> Removing packages"
 remove_packages kubuntu-firefox-installer
