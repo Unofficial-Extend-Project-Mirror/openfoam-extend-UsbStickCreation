@@ -138,11 +138,11 @@ ADDPACKAGES=\
   ipython \
   mercurial \
   mercurial-git \
-#  Not this time.
   bzflag \
   rst2pdf \
   zsh \
   jed \
+  htop \
 )
 
 WISHLIST=\
