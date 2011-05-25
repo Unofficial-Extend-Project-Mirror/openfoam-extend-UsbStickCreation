@@ -18,6 +18,7 @@ purge=
 rebase=
 record=
 transplant=
+foamdiff=~/.mercurialExtensions/foamdiff.py
 
 [pager]
 pager = LESS='FSRX' less
