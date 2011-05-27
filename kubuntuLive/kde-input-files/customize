@@ -260,7 +260,7 @@ add-apt-repository ppa:fkrull/deadsnakes
 ##
 prepare_install
 
-CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/'`
+CURRENT_KERNEL=`dpkg -l | grep linux-image-2 | sed 's/.*\([1-9]\.[1-9]\.[0-9]*-[0-9]*\).*/\1/' | head -1`
 echo "The current kernel is $CURRENT_KERNEL" 
 
 echo ">>> Installing headers for current kernel"
