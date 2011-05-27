@@ -220,7 +220,7 @@ fi
 #vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
 
 alias startOF16ext='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /usr/lib/OpenFOAM-1.6-ext/etc/bashrc'
-alias startOF16extDbg='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /usr/lib/OpenFOAM-1.6-ext-dbg/etc/bashrc'
+alias startOF16extDbg='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;export WM_COMPILE_OPTION=Debug;source /usr/lib/OpenFOAM-1.6-ext-dbg/etc/bashrc;export FOAM_TUTORIALS=/usr/share/doc/openfoam-1.6-ext/examples;source $WM_PROJECT_DIR/etc/aliases.sh'
 alias startOF171='unset FOAM_INST_DIR;unset WM_PROJECT_USER_DIR;unset WM_THIRD_PARTY_DIR;source /opt/openfoam171/etc/bashrc'
 alias startOF16extWS='startOF16ext;export FOAM_TUTORIALS=/usr/share/doc/openfoam-1.6-ext/examples; source $WM_PROJECT_DIR/etc/aliases.sh'
 
@@ -239,5 +239,8 @@ else
 fi
 
 unset PRESELECT_OPENFOAM
+
+# create $FOAM_RUN firectory
+mkdir -p $FOAM_RUN
 
 ## END OF FILE #################################################################
