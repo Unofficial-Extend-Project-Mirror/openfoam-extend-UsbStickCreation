@@ -64,7 +64,7 @@ echo "Copying content"
 cp  -rf ${SOURCEDIR}/wallpaper ${REMASTER_DIR}/usr/share/wallpapers/OFW6  || failure "cannot copy wallpaper"
 
 # try to remove old stuff
-rm -r ${REMASTER_ISO}/OFW6
+rm -rf ${REMASTER_ISO}/OFW6
 
 ## copy OFW5 to ISO-image
 cp -rf ${SOURCEDIR}/OFW6 ${REMASTER_ISO} || failure "cannot copy OFW6 directory"
