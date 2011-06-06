@@ -20,7 +20,7 @@ user=OFW6
 srcdir=OFW6Docs
 downloadPassword=leakedFromTheWorkshop
 destdir="OFW6"
-webSpace=http://web.student.chalmers.se/groups/ofw5
+webSpace=www.personal.psu.edu/dab143/OFW6
 
 
 
