@@ -17,7 +17,7 @@ EOF
 # Data specific to each workshop which will need to be changed each year
 
 user=OFW6
-srcdir=OFW6Docs
+srcdir=OFW6DocsReal
 downloadPassword=leakedFromTheWorkshop
 destdir="OFW6"
 webSpace=www.personal.psu.edu/dab143/OFW6
