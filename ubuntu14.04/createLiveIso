@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -rf /home/dc/tmp/*
+uck-remaster ubuntu-14.04-desktop-amd64.iso  customizationStuff/
+mv $HOME/tmp/remaster-new-files/livecd.iso .

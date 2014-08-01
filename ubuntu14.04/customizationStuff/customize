@@ -1,0 +1,151 @@
+#!/bin/bash -x
+# This script is used to populate the live CD image
+
+################################################################################
+# Author Dominik Christ, Wikki Ltd.                                            #
+# Based on work by Oliver Borm                                                 #
+#                                                                              #
+# This program is free software: you can redistribute it and/or modify         #
+# it under the terms of the GNU General Public License as published by         #
+# the Free Software Foundation, either version 3 of the License, or            #
+# (at your option) any later version.                                          #
+#                                                                              #
+# This program is distributed in the hope that it will be useful,              #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of               #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                #
+# GNU General Public License for more details.                                 #
+#                                                                              #
+# You should have received a copy of the GNU General Public License            #
+# along with this program. If not, see <http://www.gnu.org/licenses/>.         #
+################################################################################
+
+### Global variables ###########################################################
+CUSTOMIZE_DIR=/tmp/customization-scripts
+
+### Helper functions ###########################################################
+function expandHome 
+{
+    ( cd /home && tar zxvf $CUSTOMIZE_DIR/ubuntu_home.tgz )
+}
+
+function updatePackageNames
+{
+    add-apt-repository "deb http://archive.ubuntu.com/ubuntu \
+    $(lsb_release -sc) universe multiverse"
+	apt-get update
+}
+
+function installPackages()
+{
+	apt-get install --assume-yes --force-yes "$@"
+}
+
+function removePackages()
+{
+	apt-get --purge remove --assume-yes --force-yes "$@"
+}
+
+function installFoam()
+{
+    # Install foam-extend-3.1 as binary package
+    dpkg -i $CUSTOMIZE_DIR/foam-extend-3.1_amd64.deb
+	apt-get -f install --assume-yes --force-yes 
+
+##   No longer needed because /home/ubuntu/ (including $FOAM_RUN) is unpacked as
+##   a whole.
+#    mkdir -p /home/ubuntu/foam/ubuntu-3.1/run
+#    echo "alias f31='. /opt/foam/foam-extend-3.1/etc/bashrc'" \
+#        >> /home/ubuntu/.bashrc
+
+    # Install OpenFOAM 2.3.x from archive
+    ( cd /opt && tar zxvf $CUSTOMIZE_DIR/OpenFOAM_2.3.x.tgz )
+
+##   No longer needed because /home/ubuntu/ (including $FOAM_RUN) is unpacked as
+##   a whole.
+#    mkdir -p /home/ubuntu/OpenFOAM/ubuntu-2.3.x/run
+#    echo "alias OF23='. /opt/OpenFOAM/OpenFOAM-2.3.x/etc/bashrc'" \
+#        >> /home/ubuntu/.bashrc
+
+##   Download .zshrc to make Bernhard happy
+#    echo "echo To activate foam-extend, type \'f31\'. To activate OpenFOAM 2.3, type \'OF23\'" \ 
+#        >> /home/ubuntu/.bashrc
+}
+
+function customizeDesktop()
+{
+    echo "DUMMY"
+##   No longer needed because /home/ubuntu/ is unpacked as a whole
+##   Download .zshrc to make Bernhard happy
+#    wget -O /home/ubuntu/.zshrc http://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+
+}
+
+function copyFiles()
+{
+##   No longer needed because /home/ubuntu/ is unpacked as a whole
+#    cp -r $CUSTOMIZE_DIR/training /home/ubuntu/training
+#    cp -r $CUSTOMIZE_DIR/sponsors /home/ubuntu/sponsors
+#    cp -r $CUSTOMIZE_DIR/Desktop /home/ubuntu/Desktop
+#    ln -s /home/ubuntu/sponsors /home/ubuntu/Desktop/Sponsors
+#    ln -s /home/ubuntu/training /home/ubuntu/Desktop/Training 
+
+    ( cd /opt && tar zxvf $CUSTOMIZE_DIR/HELYX-OS.tgz )
+}
+
+### Package information ########################################################
+
+removedPackages=\
+(\
+    ubiquity
+)
+
+foamDependencies=\
+(\
+    git-core build-essential binutils-dev flex bison zlib1g-dev qt4-dev-tools \
+    libqt4-dev libncurses5-dev libiberty-dev libxt-dev rpm mercurial graphviz \
+    libscotch-dev libopenmpi-dev libcgal-dev git-core \
+)
+
+additionalPackages=\
+(\
+    xemacs21 vim-gnome \
+    python-pandas python-numpy python-pandas ipython ipython-notebook \
+    python-matplotlib python-xlwt python-vtk gnuplot-x11 \
+    zsh
+)
+
+#################################### Main #####################################
+
+echo "#### Expanding /home/ubuntu/.. ####"
+expandHome 
+echo "#### done. ####"
+
+echo "####Updating package names... ####"
+updatePackageNames
+echo "####Updating package names done. ####"
+
+echo "####Removing packages... ####"
+removePackages ${removedPackages[@]}
+echo "####Removing packages done. ####"
+
+echo "#### Installing foam dependencies... ####"
+installPackages ${foamDependencies[@]}
+echo "#### Installing foam dependencies done. ####"
+
+echo -n "Installing foam-extend and OpenFOAM(R)..."
+installFoam
+echo "done"
+
+echo "#### Installing additional packages... ####"
+installPackages ${additionalPackages[@]}
+echo "#### Installing additional packages done. ####"
+
+echo "#### Copying additional files... ####"
+copyFiles 
+echo "#### Copying additional files done. ####"
+
+echo -n "Customizing desktop"
+customizeDesktop
+echo "done"
+
+

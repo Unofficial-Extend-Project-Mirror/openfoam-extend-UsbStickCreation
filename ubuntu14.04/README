@@ -1,0 +1,10 @@
+Some useful remarks:
+1) Place Ubuntu-ISO in this directory
+2) Run Ubuntu-ISO in Virtual machine (e.g. Virtualbox) and customize wallpaper,
+add user-space configuration, create $FOAM_RUN for all FOAM versionsi, etc.. Then
+zip-up the /home/ubuntu folder
+3) Prepare all files e.g. home-folder, foam.deb package, sponsor materials, in
+ the customizationStuff folder
+4) Run "sudo createLiveISO", the result should be a livecd.iso in the same folder
+
+For questions, please contact d.christ@wikki.co.uk
